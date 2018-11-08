@@ -1,0 +1,8 @@
+* gravar os metadados (ou com o filemd ou no metadado do arquivo)
+	http://kitchingroup.cheme.cmu.edu/blog/2013/06/13/Reading-and-writing-pdf-metadata/
+* colocar o comando para fazer update (desde o último sync)
+
+import pycurl
+pip install pdfkit
+brew install Caskroom/cask/wkhtmltopdf
+

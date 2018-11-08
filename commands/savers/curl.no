@@ -1,0 +1,27 @@
+import os
+import pycurl
+import StringIO
+
+name = "curl"
+
+def method(args, article):
+    item_id = article["item_id"]
+    url = article["given_url"]
+    save_dir = os.path.join(args.output_dir, item_id)
+
+    print("Saving article %s at %s" % (item_id, url))
+
+    c = pycurl.Curl()
+    c.setopt(pycurl.URL, url)
+
+    b = StringIO.StringIO()
+    c.setopt(pycurl.WRITEFUNCTION, b.write)
+    c.setopt(pycurl.FOLLOWLOCATION, 1)
+    c.setopt(pycurl.MAXREDIRS, 5)
+    c.perform()
+    html = b.getvalue()
+    #print html
+    fh = open("file.html", "w")
+    fh.write(html)
+    fh.close()
+
