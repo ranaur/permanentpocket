@@ -1,5 +1,6 @@
 import argparse
-import builtins
+import __builtin__
+builtins = __builtin__
 import pocket
 import utils
 import yaml
@@ -18,12 +19,16 @@ def method(args):
         if os.path.isfile(os.path.join(args.output_dir, file_name)):
             file_name = os.path.join(args.output_dir, file_name)
 
-    data = open(file_name, "r").read()
-    if args.input_format == "yaml":
-        data_tree = yaml.load(data)
-    elif args.input_format ==  "json":
-        data_tree = json.loads(data)
-    else:
+    with open(file_name, "r") as fin:
+        data = fin.read()
+        if args.input_format == "yaml":
+            data_tree = yaml.load(data)
+        elif args.input_format == "json":
+            data_tree = json.loads(data)
+        else:
+            data_tree = None
+
+    if data_tree == None:
         raise ArgumentError
 
     articles = data_tree["list"]

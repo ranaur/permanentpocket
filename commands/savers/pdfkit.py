@@ -1,10 +1,11 @@
 import os
-import pdfkit
+
+from weasyprint import HTML, CSS
 
 from PyPDF3 import PdfFileReader, PdfFileWriter
 from PyPDF3.generic import NameObject, createStringObject
 
-name = "pdf"
+name = "pdfkit"
 
 def camel_case(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
@@ -60,10 +61,8 @@ def method(args, article):
     if not os.path.isfile(save_file):
         print("Saving article %s at %s" % (item_id, save_file))
         try:
-            options = {
-                'quiet': ''
-            }
             pdfkit.from_url(url, save_file, options)
+            HTML(url).write_pdf(save_file)
         except Exception as e:
             print("  * error saving article %s: %s" % (item_id, str(e)))
             pass

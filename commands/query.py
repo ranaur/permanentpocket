@@ -1,5 +1,6 @@
 import argparse
-import builtins
+import __builtin__
+builtin = __builtin__
 import pocket
 import utils
 import yaml

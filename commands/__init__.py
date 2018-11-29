@@ -1,6 +1,7 @@
 import os
 import importlib
-import builtins
+import __builtin__
+builtins = __builtin__
 
 here = os.path.dirname(__file__)
 __all__ = []

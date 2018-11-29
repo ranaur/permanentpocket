@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 import argparse
-import builtins
+import __builtin__
+builtins = __builtin__
 
 parser = argparse.ArgumentParser(description='command line metadata editor')
 builtins.command_parser = parser.add_subparsers()
